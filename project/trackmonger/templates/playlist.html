@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+
+
+{% block pages %}
+<div class="navbar">
+	<a href = "#" data-toggle = "modal" data-target = "#newPlaylistmodal"> New Playlist </a>
+	<a href="{% url 'profile' user.id %}"> My Profile </a>
+	<a href="{% url 'home' %}"> Home </a>
+	<a href="{% url 'logout' %}"> Logout </a>
+</div>
+<br>
+<br>
+<br>
+<div class="modal fade" id="newPlaylistmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Playlist Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form enctype = "multipart/form-data" action = "{% url 'createproper'%}" method = "post" class = "update-form">
+        {% csrf_token %}
+        <div class = "form-group">
+          <label for="playlist-image-input">Choose Playlist Photo</label>
+          <input type = "file" class = "form-control-file" name = "image" id = "playlist-image-input">
+        </div>
+        <div class = "form-group">
+          <label for = "playlist-name-update-input">Enter Playlist Name</label>
+          <textarea type = "text" class = "form-control" name = "name" id = "playlist-name-update-input" placeholder = "My New Playlist">My Playlist</textarea>
+        </div>
+        <div class = "form-group">
+          <label for = "playlist-description-update-input"> Enter Playlist Description</label>
+          <textarea class = "form-control" name = "desc" id = "playlist-description-update-input" rows = "3" placeholder="Songs I am listening to right now">Songs I am listening to right now</textarea>
+        </div>
+        <div class = "form-group">
+          <label for = "playlist-content-update-input"> Share with Friends (leave blank to not post) </label>
+          <textarea class = "form-control" name = "content" id = "playlist-content-update-input" rows = "3" placeholder="Hey Guys, check out my new playlist!"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<script src="{% static 'search.js' %}"> </script>
+<script src = "{% static 'Sortable.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+<script src = "{% static 'jquery.lettering-0.6.min.js' %}"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/textillate/0.4.0/jquery.textillate.js"></script>
+<script type="text/javascript" src="{% static 'jquery-comments.js' %}"></script>
+<div class = "container">
+<div id="player">
+		<i class="fa fa-volume-down"></i>
+		<div id="volume"></div>
+		<i class="fa fa-volume-up"></i>
+	</div>
+</div>
+<br>
+<div class = "container">
+	<select class="searchBar" id="searchBar" style= "width:75%" multiple="multiple">
+	</select>
+	<button onclick="submit()" id="post"> Add Song/s </button>
+</div>
+<br>
+
+<div class = "row">
+	<div class = "col-lg-6 col-md-6 col-sm-12 col-xs-12" style='text-align:center'>
+			<img class = "img-fluid ml-5" src = "{% url 'photo' playlist.pk %}" style = "height:500px; width:500px;"><br>
+			<div class = "jumbotron mt-4 rounded-100" style = 'background:linear-gradient(to right, #c31432, #240b36);margin-right:auto; margin-left:auto;'>
+				<div class = "container-fluid" >  
+					<h2 class = "display-4" style = "color:white;"> {{playlist.name}} </h2>
+					<p class = "lead" style = "color: white;"> {{playlist.desc}}</p>
+					<div class = "row">
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<div id = "checkButton">
+							{% if isCollaborating %}
+							<button type = "button" style = "background-color: Transparent; border: None" data-toggle = "modal" data-target = "#exampleModal">
+								<i class = "far fa-edit fa-2x" style = "color:white;"></i>
+							</button>
+							{% elif isFollowing %}
+							<button type = "button" style = "background-color: Transparent; border: None" onClick = "unfollowClicked()">
+								<i class="fas fa-minus fa-2x" style = "color:white;"></i>
+							</button>
+							{% else %}
+							<button type = "button" style = "background-color: Transparent; border: None" onClick = "followClicked()">
+								<i class = "fas fa-plus fa-2x" style = "color:white;"></i>
+							</button>
+							{% endif %}
+						</div>
+						</div>
+						<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						</div>
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							{% if isCollaborating%}
+							<button type = "button" style = "background-color: Transparent; border: None" data-toggle = "modal" data-target = "#addCollabModal">
+								<i class="fas fa-users fa-2x" style = "color:white;"></i>
+							</button>
+							{% endif %}
+						</div>
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+						</div>
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<i class="far fa-eye fa-2x" style = "color:white;"></i>
+						</div>
+						<div class = "d-inline col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<h3 id="views" style = "color:white;">{{playlist.views}}</h3>
+						</div>
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<button style = "background-color: Transparent; border: None"><i class="fas fa-arrow-up fa-2x" onClick = "upVoteClicked()" style = "color:white;"></i></button>
+						</div>
+						<div class = "d-inline col-lg-1 col-md-1 col-sm-1 col-xs-1">
+						<h3 id = "upvote" style = "color:white;">{{playlist.upVotes}}</h3>
+						</div>
+						<div class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<button style = "background-color: Transparent; border: None" ><i class="fas fa-arrow-down fa-2x" onClick = "downVoteClicked()" style = "color:white;"></i></button>
+						</div>
+						<div class = "d-inline col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							<h3 id="downvote" style = "color:white;">{{playlist.downVotes}}</h3>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+	</div>
+
+	<div class = "col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<div id = "playlist">
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Playlist Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    	 <form enctype = "multipart/form-data" action = "{% url 'playlist' playlist.pk %}" method = "post" class = "update-form">
+    	 	{% csrf_token %}
+    	 	<div class = "form-group">
+    	 		<label for="playlist-image-input">Choose Playlist Photo</label>
+    	 		<input type = "file" class = "form-control-file" name = "image" id = "playlist-image-input">
+    	 	</div>
+    	 	<div class = "form-group">
+    	 		<label for = "playlist-name-update-input">Enter Playlist Name</label>
+    	 		<input type = "text" class = "form-control" name = "name" value = '{{playlist.name}}' id = "playlist-name-update-input" placeholder = "My Playlist">
+    	 	</div>
+    	 	<div class = "form-group">
+    	 		<label for = "playlist-description-update-input"> Enter Playlist Description</label>
+    	 		<textarea class = "form-control" name = "desc" id = "playlist-description-update-input" rows = "3">{{playlist.desc}}</textarea>
+    	 	</div>
+      </div>
+      <div class="modal-footer">
+      	<button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addCollabModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Playlist Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class = "container">
+	<select class="searchPeople" id="searchPeople" style= "width:45%" multiple="multiple">
+	</select>
+	<button onclick="addCollab()" id="post"> Add Collaborators </button>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+{% endblock %}
+<head> 
+	<meta http-equiv="Content-Security-Policy" content="default-src 'none'; form-action 'none'; frame-ancestors 'none';">
+	
+</head>
+

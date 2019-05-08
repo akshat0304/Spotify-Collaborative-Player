@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block pages %}
+<div>
+	<a id= "id_login_link" href="/">
+		<button> login </button>
+	</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<p> Register </p>
+<form method="post" action="register">
+	{% csrf_token %}
+	<table>
+		{{ form }}
+	</table>
+	<button id = "id_register_button" type="submit"> Submit </button>
+</form>
+{% endblock %}

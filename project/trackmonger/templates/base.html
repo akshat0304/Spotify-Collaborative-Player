@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+	<head>
+		<meta charset="UTF-8">
+		<title> Blog </title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+		<link href="{% static 'dropdown.css' %}" rel="stylesheet">
+		<link href="{% static 'simplegrid.css' %}" rel="stylesheet">
+		<link rel = "stylesheet" href = "{% static 'nouislider.css' %}">
+		<script src = "{% static 'nouislider.js' %}"></script>
+		<script src = "{% static 'search.js' %}"></script>
+
+ 		<link href = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css" rel="stylesheet" />
+ 		<link rel="stylesheet" type="text/css" href="{% static 'jquery-comments.css' %}">
+ 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link href="{% static 'dropdown.css' %}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+ 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
+<script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
+
+ 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+	<body>
+	<style type="text/css">
+   	body {   background: linear-gradient(to right, #000000, #434343); } 
+	</style>
+	<style>
+	.testimonial-group > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+.testimonial-group::-webkit-scrollbar * {
+	background:transparent;
+}
+
+</style>
+<div class = "container-fluid">
+<div class = "jumbotron" style =   "background: linear-gradient(to left, #c33764, #1d2671); ">
+	<div class = "row">
+	<div class ="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+<img class = "d-inline float-left " src = "{% static 'music.png' %}" style="width:60px;height:60px;">
+<h2 class = "d-inline float-left" style = "color:white;">TrackMonger</h2>
+</div>
+<div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+</div>
+<div class ="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+<div class = "container float-right" style = "width:400px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364);">
+	<div class = "row">
+		<div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+			<img class = "mt-1" id = "currently-playing-image" style = "width:60px; height:60px;"></img>
+		</div>
+		<div class ="col-lg-5 col-md-5 col-sm-5 col-xs-5 mt-2">
+		<p id = "current-song" style="color:white;">Track Name<br> Artist</p>
+	</div>
+	<div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-2">
+	<button id = "play-music" class = "play_button" onClick = "playClicked(this)"> Play</button>
+</div>
+	<div class ="col-lg-3 col-md-3 col-sm-3 col-xs-3 mt-2">
+	<p class = "float-right mt-3" id = "time-remaining" style = "color:white;"></p>
+	</div>
+	<div class = "container mt-1 mb-2">
+	<div id = "slider"></div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+	<div class = "pages">
+		{% block pages %}
+		{% endblock %}
+	</div>
+	<div class = "content">
+		{% block content %}
+		{% endblock %}	
+	</div>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block pages %}
+
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class = "container">
+<div class="col-lg-4 col-md-4 col-sm-0 col-xs-0"></div>
+<div class = "col-lg-4 col-md-4 cold-sm-12 col-xs-12">
+<form method="post" action="/">
+	{% csrf_token %}
+	
+	<img class = "mb-4" src = "{% static 'music.png' %}" style="width:100px;height:100px;">
+	<h2 style = "color:white;"> TrackMonger </h2> <br>
+	<input type="text" name = "username" id="id_username" class = "form-control" placeholder="Username">
+	<input type = "password" name = "password" id = "id_password" class = "form-control" placeholder = "Password">
+
+
+	<br>
+	<button class = "btn btn-lg btn-block btn-light" id = "id_login_button" type="submit"> Login </button>
+	</form>
+	<a id = "id_register_link" href = "{% url 'register' %}"> <button class = "btn btn-lg btn-block btn-light mt-2"> Register</button></a>
+
+</div>
+<div class="col-lg-4 col-md-4 col-sm-0 col-xs-0"></div>
+</div>
+{% endblock %}

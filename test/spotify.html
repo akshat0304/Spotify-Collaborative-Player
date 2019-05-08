@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <title>Music Test</title>
+        <link rel="stylesheet" type="text/css" href="simplegrid.css" />
+		    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+		<style>
+			.content {
+				background: #ccc;
+				padding: 10px;
+			}
+		</style>
+        
+    </head>
+    <body>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      
+      <!-- <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/sortable.js"></script> -->
+      <script src = "Sortable.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+      <script src = "spotify.js"></script>
+            <!-- <div class = "grid">
+                    <div class="col-1-2">
+                            Songs I am listening to right now
+                    </div>
+                    <div class = "col-1-2">
+                            <iframe src="https://p.scdn.co/mp3-preview/eceb1b928c7339ba16bfde8c4f9731af72ee1637?cid=d8a5ed958d274c2e8ee717e6a4b0971d&view=coverart" width="auto" height="auto" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <iframe src="https://open.spotify.com/embed/track/6CTJx9qwwA6uiLIdPS8yZ3" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <iframe src="https://open.spotify.com/embed/track/0rTV5WefWd1J3OwIheTzxM" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <iframe src="https://open.spotify.com/embed/track/1EbWiEra7ovNsMq3DeLSDy" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </div>
+                    
+            </div> -->
+           <!--  <ul id = "items">
+              <li>One</li>
+              <li>Two</li>
+              <li>Three</li>
+            </ul> -->
+            <ul id = "items" class = "playlist-grid">
+                <li><div><i class="fas fa-arrows-alt handle"></i><iframe id = "frame1" src="https://open.spotify.com/embed/track/53CJANUxooaqGOtdsBTh7O" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></li>
+                <li><div><i class="fas fa-arrows-alt handle"></i><iframe id = "frame2" src="https://open.spotify.com/embed/track/6CTJx9qwwA6uiLIdPS8yZ3" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></li>
+                <li><div><i class="fas fa-arrows-alt handle"></i><iframe id = "frame3" src="https://open.spotify.com/embed/track/0rTV5WefWd1J3OwIheTzxM" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></li>
+                <li><div><i class="fas fa-arrows-alt handle"></i><iframe id = "frame4" src="https://open.spotify.com/embed/track/1EbWiEra7ovNsMq3DeLSDy" width="550" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div></li>
+            </ul>
+    	<script>
+            window.onSpotifyWebPlaybackSDKReady = () => {
+              const token = 'BQCDjMSkSg7vzF6sttVamS96aawxtvBPxnruBD9RPz6fOvX_2kI1HBrFh5LawIK98ewYXJBK5cDuDe9a0Wfrmfdb8O7a9JrwVPXn8DtccQfc19sxG9mDI6pVeMNGz7aByxyit-unL2Wj382UXmoXLuGh-sM7b3IyG0YI9AT9yT2C3Gyh2U69Mab1rP8b';
+              const player = new Spotify.Player({
+                name: 'Web Playback SDK Quick Start Player',
+                getOAuthToken: cb => { cb(token); }
+              });
+        
+              // Error handling
+              player.addListener('initialization_error', ({ message }) => { console.error(message); });
+              player.addListener('authentication_error', ({ message }) => { console.error(message); });
+              player.addListener('account_error', ({ message }) => { console.error(message); });
+              player.addListener('playback_error', ({ message }) => { console.error(message); });
+        
+              // Playback status updates
+              player.addListener('player_state_changed', state => { console.log(state); });
+        
+              // Ready
+              player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID', device_id);
+              });
+        
+              // Not Ready
+              player.addListener('not_ready', ({ device_id }) => {
+                console.log('Device ID has gone offline', device_id);
+              });
+        
+              // Connect to the player!
+              player.connect();
+            };
+          </script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    
+    </body>
+</html>

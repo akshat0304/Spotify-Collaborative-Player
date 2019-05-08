@@ -1,0 +1,178 @@
+/*.heading {
+    width: 98%;
+    height: 80px;
+    padding: 6px;
+   	background-color: #333;
+   	text-align: center;
+}
+
+#id_name_of_site {
+	margin-top: 10px;
+	font-size: 48px;
+	bottom: 30px;
+	display: inline-block;
+	color: white;
+
+}
+
+.upvote {
+	color: red;
+}
+.row {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+    width: 800px;
+    height: 80px;
+    text-align: center;
+    font-size: large;
+}
+
+.image-row {
+	margin-left: auto;
+	margin-right: auto;
+    width: 800px;
+    height: 640px;
+    text-align: center;
+    font-size: large;
+}
+
+.follower {
+	margin-left: auto;
+	margin-right: auto;
+    width: 500px;
+    height: 60px;
+    text-align: left;
+    font-size: large;
+}
+
+.comments {
+	margin-left: auto;
+	margin-right: auto;
+    width: 600px;
+    height: 80px;
+    text-align: center;
+}
+
+
+#id_post_text {
+	width: 500px;
+	height: 40px;
+	margin-right: 10px;
+}
+
+
+.id_post_comment {
+	width: 300px;
+	height: 40px;
+	margin-right: 10px;
+}
+
+.listElem {
+	margin-right: 100px;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 10px;
+	font-size: x-large;
+}
+
+.pages {
+	position: absolute;
+    font-family: sans-serif; 
+    padding-right: 10px;
+    font-size: x-large;
+    right: 0;
+    margin-right: 5px;
+}
+
+.content {
+	margin-top: 40px;
+	text-align: center;
+}
+
+div {
+	padding: 4px;
+}
+
+button {
+	font-size: x-large;
+	height: 50px;
+	width: 100px;
+	border-radius: 10px;
+}
+
+p {
+	font-size: x-large;
+	text-align: center;
+}
+
+form {
+	font-size : large;
+}
+
+a {
+	font-size: x-large;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+    color: black;
+}
+
+.posts {
+	font-size: x-large;
+
+}
+
+.handle {
+	cursor:grab;
+}
+
+.links {
+	font-size: x-large;
+	font-style: italic;
+}
+
+.time {
+	float: right;
+}
+
+img {
+	height: 450px;
+	width: 375px;
+}
+
+#id_bio_text {
+	height: 100px;
+	width: 500px;
+	margin-top: 10px;
+	font-size: large;
+}
+
+#playlist_title {
+	height: 60px;
+	width: 300px;
+	margin-top: 20px;
+}
+
+.formfield * {
+  vertical-align: middle;
+}
+
+#id_update_profile_button {
+	font-size: large;
+}
+
+#post {
+	width: auto;
+	font-size: medium;
+
+}
+
+
+
+*/

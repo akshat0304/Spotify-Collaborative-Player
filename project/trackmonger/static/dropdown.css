@@ -1,0 +1,111 @@
+/* 
+  Taken from W3schools tutorial on dropdowns 
+  https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
+*/
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+  margin-right: 10px;
+  float: right;
+  width: auto;
+  height: 60px;
+  margin-top: 1px;
+
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: large;
+}
+
+#player {
+  width: 350px;
+  height: 50px;
+  position: relative;
+  margin: 0 auto;
+  top: 80px;
+  
+  i {
+    position: absolute;
+    margin-top: -6px;
+    color: #666;
+  }
+  
+  i.fa-volume-down {
+    margin-left: -8px;
+  }
+  
+  i.fa-volume-up {
+    margin-right: -8px;
+    right: 0;
+  }
+}
+
+#volume {
+/*  position: absolute;
+  left: 24px;*/
+  margin: 0 auto;
+  height: 5px;
+  width: 300px;
+  background: #555;
+  border-radius: 15px;
+  
+  .ui-slider-range-min {
+    height: 5px;
+    width: 300px;
+    position: absolute;
+    background: $primary-color;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+  }
+  
+  .ui-slider-handle {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: #FFF;
+    position: absolute;
+    margin-left: -8px;
+    margin-top: -8px;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover,  {
+  background-color: red;
+}
+
+.play_button {
+   border: 0;
+   background: transparent;
+   box-sizing: border-box;
+   width: 50px;
+   height: 50px;
+   border-color: transparent transparent transparent #202020;
+   transition: 100ms all ease;
+   cursor: pointer;
+   border-style: solid;
+   border-width: 25px 0 25px 40px;
+}
+ .play_button.paused {
+   border-style: double;
+   border-width: 0px 0 0px 40px;
+}
+ .play_button:hover {
+   border-color: transparent transparent transparent #404040;
+}
+ 
+
+

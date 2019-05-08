@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player.js: Music Demo</title>
+    <meta name="description" content="Create a simple music player across a number of different services.">
+    <link rel="stylesheet" href="font-awesome.min.css" />
+    <link rel="stylesheet" href="foundation.min.css" />
+    <link rel="stylesheet" href="playerjs.css" />
+    <script src="modernizr.js"></script>
+  </head>
+  <body class="music">
+
+
+  <div class="row">
+
+
+
+    <div class="large-8 columns content">
+      <div class="row">
+        <div class="large-10 large-centered columns">
+          <div class="controls">
+            <div class="row">
+              <div class="large-1 medium-1 small-1 columns">
+                <a class="play paused">
+                  <i class="fa fa-play"></i>
+                  <i class="fa fa-pause"></i>
+                </a>
+              </div>
+              <div class="large-8 medium-8 small-8 columns">
+                <div class="progress">
+                  <span class="meter"></span>
+                </div>
+              </div>
+              <div class="large-3 medium-3 small-3 columns">
+                <a class="volume">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </a>
+                <a class="loop">
+                  <i class="fa fa-repeat"></i>
+                </a>
+                <a class="previous">
+                  <i class="fa fa-step-backward"></i>
+                </a>
+                <a class="next">
+                  <i class="fa fa-step-forward"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul id="tracks"></ul>
+    </div>
+  </div>
+
+  <script src="jquery.js"></script>
+  <!-- <script src="jquery.js" type="text/javascript"></script> -->
+  <script src="foundation.min.js"></script>
+  <script src="http://cdn.embed.ly/jquery.embedly-3.1.1.min.js"></script>
+  <script type="text/javascript" src="http://cdn.embed.ly/player-0.1.0.min.js"></script>
+  <script src="common.js"></script>
+  <script type = "text/javascript" src="music.js"></script>
+  <script>
+    $.embedly.defaults.key = '3ee528c9eb4b4908b268ce1ace120c92';
+    $(document).foundation();
+  </script>
+  </body>
+</html>

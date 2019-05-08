@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+
+
+{% block pages %}
+<div class="navbar">
+	<a href = "#" data-toggle = "modal" data-target = "#newPlaylistmodal"> New Playlist </a>
+	<a href="{% url 'profile' user.id %}"> My Profile </a>
+	<a href="{% url 'home' %}"> Home </a>
+	<a href="{% url 'logout' %}"> Logout </a>
+</div>
+<br>
+<br>
+<br>
+<div class="modal fade" id="newPlaylistmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Playlist Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    	 <form enctype = "multipart/form-data" action = "{% url 'createproper'%}" method = "post" class = "update-form">
+    	 	{% csrf_token %}
+    	 	<div class = "form-group">
+    	 		<label for="playlist-image-input">Choose Playlist Photo</label>
+    	 		<input type = "file" class = "form-control-file" name = "image" id = "playlist-image-input">
+    	 	</div>
+    	 	<div class = "form-group">
+    	 		<label for = "playlist-name-update-input">Enter Playlist Name</label>
+    	 		<textarea type = "text" class = "form-control" name = "name" id = "playlist-name-update-input" placeholder = "My New Playlist">My Playlist</textarea>
+    	 	</div>
+    	 	<div class = "form-group">
+    	 		<label for = "playlist-description-update-input"> Enter Playlist Description</label>
+    	 		<textarea class = "form-control" name = "desc" id = "playlist-description-update-input" rows = "3" placeholder="Songs I am listening to right now">Songs I am listening to right now</textarea>
+    	 	</div>
+    	 	<div class = "form-group">
+    	 		<label for = "playlist-content-update-input"> Share with Friends (leave blank to not post) </label>
+    	 		<textarea class = "form-control" name = "content" id = "playlist-content-update-input" rows = "3" placeholder="Hey Guys, check out my new playlist!"></textarea>
+      </div>
+      <div class="modal-footer">
+      	<button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<style>
+	.testimonial-group > .row {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+.testimonial-group::-webkit-scrollbar * {
+	background:transparent;
+}
+</style>
+
+<div class = "jumbotron ml-4 mr-4" style = "background: linear-gradient(to right, #41295a, #2f0743);">
+	<h3 class = "display-4" style = "color:white;">
+	  	{{profile.user.first_name}} {{profile.user.last_name}}
+	  	<button class = "float-right" type = "button" style = "background-color: Transparent; border: None" data-toggle = "modal" data-target = "#updateProfile">
+		<i class = "far fa-edit" style = "color:white;"></i>
+		</button>
+		</h3>
+		
+		<br>
+	<div class = "row">
+		<div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
+		<img src = "{% url 'profileimage' profile.user.id %}" style = "width:150px; height:150px;">
+		</div>
+		<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<p class = "h4" style = "color:white;"> Top Artists </p>
+			<ul style = "color:white;">
+				{% for a in topartists %}
+				<li>{{a}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<p class = "h4" style = "color:white;"> Top Genres </p>
+			<ul style = "color:white;">
+				{% for g in topgenres %}
+				<li>{{g}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+<div class = "jumbotron ml-4 mr-4" style = "background: linear-gradient(to right, #41295a, #2f0743);">
+	<span style = "color:white;"><h4>Posted Playlists</h4></span>
+	<div class = "testimonial-group card-deck">
+		<div class = "row text-center">
+			{% for p in playlist %}
+						<div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4 ml-4">
+						<div class = "card" style="width: 12.5rem;">
+							<img class="card-img-top" src = "{% url 'photo' p.pk %}" style="width:197px;height:180px;">
+							<div class = "card-body">
+								<h5 class = "card-title">{{p.name}}</h5>
+								<a href = {% url 'profile' p.user.id %}><p class = "card-text"> by {{p.user.username}} </p></a>
+								<a href = "{% url 'playlist' p.pk %}" class = "btn btn-primary">Go to playlist</a>
+							</div>
+						</div>
+					</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<div class = "jumbotron ml-4 mr-4" style = "background: linear-gradient(to right, #41295a, #2f0743);">
+	<span style = "color:white;"><h4>Followed Playlists</h4></span>
+	<div class = "testimonial-group card-deck">
+		<div class = "row text-center">
+					{% for p in following %}
+						<div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4 ml-4">
+						<div class = "card" style="width: 12.5rem;">
+							<img class="card-img-top" src = "{% url 'photo' p.pk %}" style="width:197px;height:180px;">
+							<div class = "card-body">
+								<h5 class = "card-title">{{p.name}}</h5>
+								<a href = {% url 'profile' p.user.id %}><p class = "card-text"> by {{p.user.username}} </p></a>
+								<a href = "{% url 'playlist' p.pk %}" class = "btn btn-primary">Go to playlist</a>
+							</div>
+						</div>
+					</div>
+			{% endfor %}
+						
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form enctype = "multipart/form-data" action = "{% url 'profile' profile.user.id%}" method = "post" class = "update-form">
+    	 	{% csrf_token %}
+    	 	<div class = "form-group">
+    	 		<label for="profile-image-input">Choose Playlist Photo</label>
+    	 		<input type = "file" class = "form-control-file" name = "image" id = "profile-image-input">
+    	 	</div>
+      </div>
+      <div class="modal-footer">
+      	<button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+{% endblock %}

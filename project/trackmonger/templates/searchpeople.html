@@ -1,0 +1,24 @@
+% extends 'base.html' %}
+
+
+
+{% block pages %}
+<!-- <div class="navbar">
+</div> -->
+{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<script src="{% static 'searchPeople.js' %}"></script>
+<script src = "{% static 'jquery.lettering-0.6.min.js' %}"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/textillate/0.4.0/jquery.textillate.js"></script>
+<script type="text/javascript" src="{% static 'jquery-comments.js' %}"></script>
+
+<div class = "container">
+	<select class="searchBar" id="searchBar" style= "width:75%" multiple="multiple">
+	</select>
+	<button onclick="submit()" id="post"> Add Song/s </button>
+</div>
+
+{% endblock %}
